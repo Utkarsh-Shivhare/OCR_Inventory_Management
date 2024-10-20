@@ -7,20 +7,32 @@
   </head>
   <body>
     <div class="container">
-      <h1 class="mt-5">Upload Images for Product Detection</h1>
+      <h1 class="mt-5">Upload Images for Detection</h1>
+      
+      <!-- Form to upload images and select the action (count or identify) -->
       <form method="POST" enctype="multipart/form-data">
         <div class="form-group">
           <label for="images">Select Images</label>
           <input type="file" class="form-control-file" name="images" id="images" multiple>
         </div>
+        
+        <!-- Radio buttons to choose the action: count items or identify products -->
+        <div class="form-group">
+          <label>Select Action:</label><br>
+          <input type="radio" id="count" name="action" value="count" checked>
+          <label for="count">Count items</label><br>
+          <input type="radio" id="identify" name="action" value="identify">
+          <label for="identify">Identify products</label>
+        </div>
+        
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
 
-      {% if detected_products %}
-        <h2 class="mt-5">Detected Products</h2>
+      {% if detected_results %}
+        <h2 class="mt-5">Detection Results</h2>
         <ul>
-          {% for image, product in detected_products.items() %}
-            <li>{{ image }}: {{ product }}</li>
+          {% for image, result in detected_results.items() %}
+            <li>{{ image }}: {{ result }}</li>
           {% endfor %}
         </ul>
       {% endif %}
