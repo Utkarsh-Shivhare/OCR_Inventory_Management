@@ -15,7 +15,7 @@ Manually feeding product details into a system can be time-consuming and error-p
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/<your-username>/<repo-name>.git
+   git clone https://github.com/Utkarsh-Shivhare/OCR_Inventory_Management.git
    cd OCR_INVENTORY_MANAGER
    ```
 
