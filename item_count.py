@@ -1,5 +1,3 @@
-
-
 from ultralytics import YOLO
 
 # Load the YOLO model (make sure to replace the path with the correct one for your model)

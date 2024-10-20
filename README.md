@@ -1,15 +1,17 @@
 # OCR Inventory Manager
 
-This project demonstrates how to manage inventory and create bills using an OCR-based system integrated with Flask. The app automates the process of reading product details from images, extracting text using OCR, and matching those details against a product inventory stored in an Excel file.
+This project demonstrates how to manage inventory and create bills using an OCR-based system integrated with Flask. The app automates the process of reading product details from images, extracting text using OCR, and matching those details against a product inventory stored in an Excel file. Additionally, it can count the number of items present in an image, and for counting particular items, the `item_count.py` file can be used.
 
 ## Overview
-Manually feeding product details into a system can be time-consuming and error-prone. This project provides an automated solution to manage inventory using OCR (Optical Character Recognition) technology. By uploading product images, the app extracts text data and matches it against a pre-existing inventory, helping businesses generate bills and track inventory automatically.
+Manually feeding product details into a system can be time-consuming and error-prone. This project provides an automated solution to manage inventory using OCR (Optical Character Recognition) technology. By uploading product images, the app extracts text data and matches it against a pre-existing inventory, helping businesses generate bills and track inventory automatically. If there are multiple items in a single image, the YOLOv8 model can be used for detection, and the detected parts can be sent for OCR detection for product identification purposes, which can be run using the `ocr_with_detection.py` file.
 
 ### Features
 - **OCR Integration**: Extracts text from product images.
 - **Product Matching**: Matches OCR output with product inventory using fuzzy matching and FAISS search for fast and accurate results.
 - **Multi-Image Upload**: Supports uploading multiple images for batch processing.
 - **Flask Web Interface**: Provides a simple web interface to upload images and view detected products.
+- **Item Counting**: Counts the number of items present in an image using the `item_count.py` file.
+- **YOLOv8 Detection**: Detects multiple items in a single image for accurate OCR processing.
 
 ## How to Set Up the Application
 

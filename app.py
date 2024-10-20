@@ -39,7 +39,7 @@ def fuzzy_match(text, candidates):
 
 # Helper function: Preprocess product for matching
 def preprocess_product(product_row):
-    product_name = ' '.join(str(product_row['Product Name']).split()[1:])  # Remove the first word
+    product_name = ' '.join(str(product_row['Product Name']).split()[0:])  # Remove the first word
     return f"{product_name}"
 
 # Step 5: Use TF-IDF for vectorizing product strings
@@ -92,6 +92,13 @@ def search_with_faiss(query, faiss_index, vectorizer, product_strings, top_k=3):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    # Clear the uploads directory at the start of the function
+    upload_folder = 'uploads'
+    for filename in os.listdir(upload_folder):
+        file_path = os.path.join(upload_folder, filename)
+        if os.path.isfile(file_path):
+            os.remove(file_path)
+
     if request.method == 'POST':
         files = request.files.getlist('images')
         detected_products = {}
@@ -129,10 +136,16 @@ def index():
             # best_product = refined_matches[0][0] if refined_matches else None
 
             # Add the result to the dictionary
-            detected_products[file.filename] = f"{brand.title()} {product_name.title()}" 
-
-            # Optionally, remove the temporary image file after processing
-            os.remove(image_path)
+            # detected_products[file.filename] = f"{brand.title()} {product_name.title()}" 
+            product_key = f"{brand.title()} {product_name.title()}"
+            if product_key in detected_products:
+                detected_products[product_key]["count"] += 1
+            else:
+                detected_products[product_key] = {
+                    "product": product_key,
+                    "count": 1,
+                    "file_name": file.filename  # Store the file name for frontend use
+                }
 
         # Return the results as a dictionary
         return jsonify(detected_products)
