@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Product Detection</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="mt-5">Upload Images for Product Detection</h1>
+      <form method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="images">Select Images</label>
+          <input type="file" class="form-control-file" name="images" id="images" multiple>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      {% if detected_products %}
+        <h2 class="mt-5">Detected Products</h2>
+        <ul>
+          {% for image, product in detected_products.items() %}
+            <li>{{ image }}: {{ product }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  </body>
+</html>
